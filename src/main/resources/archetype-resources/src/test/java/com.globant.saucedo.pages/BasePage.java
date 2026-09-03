@@ -1,4 +1,5 @@
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -56,6 +57,28 @@ public class BasePage {
         element.clear();
         element.sendKeys(text);
     }
+
+    //menu hamburguesa
+    @FindBy(id = "react-burger-menu-btn")
+    private WebElement hamburgerMenuButton;
+
+    @FindBy(data-test="inventory-sidebar-link")
+    private WebElement inventorySidebarLink;
+
+    @FindBy(id = "logout_sidebar_link")
+    private WebElement logoutSidebarLink;
+
+    //presionar menu hamburguesa
+    public void clickHamburgerMenuButton() {
+        click(hamburgerMenuButton);
+    }
+
+    //salir de la aplicacion
+    public void clickLogoutSidebarLink() {
+        click(logoutSidebarLink);
+        return new LoginPage(driver);
+    }
+
 
 
 }

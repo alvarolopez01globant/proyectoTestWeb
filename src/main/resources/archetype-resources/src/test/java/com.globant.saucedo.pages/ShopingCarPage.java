@@ -22,4 +22,18 @@ public class ShopingCarPage extends BasePage {
         }
     }
 
+    // eliminar todos los productos del carrito de compras
+    public void removeAllProductsFromCart() {
+        for (WebElement button : removeButtons) {
+            click(button);
+        }
+    }
+
+    // hacer click en el boton de checkout
+    public void clickCheckoutButton() {
+        click(checkoutButton);
+        return new CheckoutPage(driver);
+    }
+
+
 }
