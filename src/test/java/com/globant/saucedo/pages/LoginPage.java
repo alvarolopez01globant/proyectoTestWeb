@@ -1,6 +1,11 @@
+package com.globant.saucedo.pages;
+
+import com.globant.saucedo.utils.BasePage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage estends BasePage{
+public class LoginPage extends BasePage {
 
     @FindBy(id = "user-name")
     private WebElement userNameField;
@@ -11,9 +16,7 @@ public class LoginPage estends BasePage{
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
+    public LoginPage(WebDriver driver) { super(driver); }
 
     public ProductsPage login(String username, String password) {
         writeText(userNameField, username);
@@ -25,9 +28,4 @@ public class LoginPage estends BasePage{
         waitForVisibility(loginButton);
         return loginButton.isDisplayed();
     }
-
-
-
-
-
 }
