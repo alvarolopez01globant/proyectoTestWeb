@@ -1,6 +1,7 @@
 package com.globant.saucedo.pages;
 
 import com.globant.saucedo.utils.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,14 +15,16 @@ import java.util.List;
  */
 public class ShoppingCartPage extends BasePage {
 
-    @FindBy(css = "button[data-test^='remove']")
-    private List<WebElement> removeButtons;
+    private List<WebElement> getRemoveButtons() {
+        return driver.findElements(By.cssSelector("button[data-test^='remove']"));
+    }
 
     @FindBy(css = "#checkout")
     private WebElement checkoutButton;
 
-    @FindBy(css = "[data-test='inventory-item']")
-    private List<WebElement> cartItems;
+    private int countCartItems() {
+        return driver.findElements(By.cssSelector(".cart_item")).size();
+    }
 
     /**
      * Crea una nueva instancia de la página del carrito.
@@ -36,7 +39,7 @@ public class ShoppingCartPage extends BasePage {
      * Verifica que no existan artículos en el carrito.
      */
     public void assertCartIsEmpty() {
-        Assert.assertTrue(cartItems.isEmpty(), "The shopping cart is not empty");
+        Assert.assertTrue(countCartItems() == 0, "The shopping cart is not empty");
     }
 
     /**
@@ -45,15 +48,16 @@ public class ShoppingCartPage extends BasePage {
      * @return cantidad de artículos en el carrito
      */
     public int getCartItemsCount() {
-        return cartItems.size();
+        return countCartItems();
     }
 
     /**
      * Elimina un producto del carrito si existe al menos uno.
      */
     public void removeProductFromCart() {
-        if (!removeButtons.isEmpty()) {
-            click(removeButtons.get(0));
+        List<WebElement> buttons = getRemoveButtons();
+        if (!buttons.isEmpty()) {
+            click(buttons.get(0));
         }
     }
 
@@ -61,8 +65,8 @@ public class ShoppingCartPage extends BasePage {
      * Elimina todos los productos del carrito.
      */
     public void removeAllProductsFromCart() {
-        while (!removeButtons.isEmpty()) {
-            click(removeButtons.get(0));
+        while (!getRemoveButtons().isEmpty()) {
+            click(getRemoveButtons().get(0));
         }
     }
 

@@ -29,12 +29,14 @@ public class ProductsPage extends BasePage {
     private WebElement shoppingCartButton;
 
     /** Lista dinámica de botones que se encuentran actualmente en estado "Add to Cart" */
-    @FindBy(css = "button[data-test^='add-to-cart']")
-    private List<WebElement> addToCartButtons;
+    private List<WebElement> getAddToCartButtons() {
+        return driver.findElements(By.cssSelector("button[data-test^='add-to-cart']"));
+    }
 
     /** Lista dinámica de botones que se encuentran actualmente en estado "Remove" */
-    @FindBy(css = "button[data-test^='remove']")
-    private List<WebElement> removeButtons;
+    private List<WebElement> getRemoveButtons() {
+        return driver.findElements(By.cssSelector("button[data-test^='remove']"));
+    }
 
     /** Botón para desplegar el menú hamburguesa lateral */
     @FindBy(id = "react-burger-menu-btn")
@@ -69,8 +71,9 @@ public class ProductsPage extends BasePage {
      */
     public void addMultipleProductsToCart(int count) {
         for (int i = 0; i < count; i++) {
-            if (!addToCartButtons.isEmpty()) {
-                click(addToCartButtons.get(0));
+            List<WebElement> addButtons = getAddToCartButtons();
+            if (!addButtons.isEmpty()) {
+                click(addButtons.get(0));
             } else {
                 break;
             }
@@ -81,8 +84,9 @@ public class ProductsPage extends BasePage {
      * Agrega el primer producto disponible en la tienda al carrito de compras.
      */
     public void addProductToCart() {
-        if (!addToCartButtons.isEmpty()) {
-            click(addToCartButtons.get(0));
+        List<WebElement> addButtons = getAddToCartButtons();
+        if (!addButtons.isEmpty()) {
+            click(addButtons.get(0));
         }
     }
 
@@ -90,9 +94,10 @@ public class ProductsPage extends BasePage {
      * Agrega al carrito un producto aleatorio entre los disponibles.
      */
     public void addRandomProductToCart() {
-        if (!addToCartButtons.isEmpty()) {
-            int randomIndex = new Random().nextInt(addToCartButtons.size());
-            click(addToCartButtons.get(randomIndex));
+        List<WebElement> addButtons = getAddToCartButtons();
+        if (!addButtons.isEmpty()) {
+            int randomIndex = new Random().nextInt(addButtons.size());
+            click(addButtons.get(randomIndex));
         }
     }
 
@@ -100,8 +105,9 @@ public class ProductsPage extends BasePage {
      * Elimina del catálogo el primer producto que se encuentre actualmente en estado "Remove".
      */
     public void removeProductFromInventory() {
-        if (!removeButtons.isEmpty()) {
-            click(removeButtons.get(0));
+        List<WebElement> buttons = getRemoveButtons();
+        if (!buttons.isEmpty()) {
+            click(buttons.get(0));
         }
     }
 
@@ -113,7 +119,7 @@ public class ProductsPage extends BasePage {
      * @return {@code true} si coincide el conteo, de lo contrario {@code false}
      */
     public boolean isProductAdded(int expectedCount) {
-        return removeButtons.size() == expectedCount;
+        return getRemoveButtons().size() == expectedCount;
     }
 
     /**
