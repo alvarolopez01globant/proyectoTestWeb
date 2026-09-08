@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Clase que representa la página principal del catálogo de productos (Inventory/Products)
@@ -82,6 +83,16 @@ public class ProductsPage extends BasePage {
     public void addProductToCart() {
         if (!addToCartButtons.isEmpty()) {
             click(addToCartButtons.get(0));
+        }
+    }
+
+    /**
+     * Agrega al carrito un producto aleatorio entre los disponibles.
+     */
+    public void addRandomProductToCart() {
+        if (!addToCartButtons.isEmpty()) {
+            int randomIndex = new Random().nextInt(addToCartButtons.size());
+            click(addToCartButtons.get(randomIndex));
         }
     }
 

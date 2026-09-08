@@ -11,16 +11,16 @@ import org.openqa.selenium.support.FindBy;
  */
 public class CheckoutPage extends BasePage {
 
-    @FindBy(css = "[data-test='first-name']")
+    @FindBy(id = "first-name")
     private WebElement firstNameInput;
 
-    @FindBy(css = "[data-test='last-name']")
+    @FindBy(id = "last-name")
     private WebElement lastNameInput;
 
-    @FindBy(css = "[data-test='postal-code']")
+    @FindBy(id = "postal-code")
     private WebElement postalCodeInput;
 
-    @FindBy(css = "[data-test='continue']")
+    @FindBy(id = "continue")
     private WebElement continueButton;
 
     /**

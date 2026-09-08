@@ -15,6 +15,9 @@ public class CompletePage extends BasePage {
     @FindBy(css = "[data-test='checkout-complete-container']")
     private WebElement completeHeader;
 
+    @FindBy(css = "[data-test='complete-header']")
+    private WebElement confirmationMessage;
+
     /**
      * Crea una nueva instancia de la página de compra completada.
      *
@@ -30,5 +33,15 @@ public class CompletePage extends BasePage {
     public void assertCompleteHeaderIsDisplayed() {
         waitForVisibility(completeHeader);
         Assert.assertTrue(completeHeader.isDisplayed(), "The complete header is not displayed");
+    }
+
+    /**
+     * Devuelve el mensaje principal de confirmación de compra.
+     *
+     * @return texto del mensaje de confirmación
+     */
+    public String getConfirmationMessage() {
+        waitForVisibility(confirmationMessage);
+        return confirmationMessage.getText();
     }
 }

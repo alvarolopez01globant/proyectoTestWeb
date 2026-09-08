@@ -40,6 +40,15 @@ public class ShoppingCartPage extends BasePage {
     }
 
     /**
+     * Obtiene la cantidad de elementos actualmente visibles en el carrito.
+     *
+     * @return cantidad de artículos en el carrito
+     */
+    public int getCartItemsCount() {
+        return cartItems.size();
+    }
+
+    /**
      * Elimina un producto del carrito si existe al menos uno.
      */
     public void removeProductFromCart() {
