@@ -48,9 +48,9 @@ public class ProductsPage extends BasePage {
     // ==========================================
 
     /**
-     * Inicializa los elementos web de la página de productos utilizando {@link PageFactory}.
+     * Crea una nueva instancia de la página de productos.
      *
-     * @param driver Instancia activa de {@link WebDriver}
+     * @param driver instancia activa del navegador
      */
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -143,6 +143,11 @@ public class ProductsPage extends BasePage {
         return new LoginPage(driver);
     }
 
+    /**
+     * Método de compatibilidad que ejecuta el logout.
+     *
+     * @return una nueva instancia de {@link LoginPage}
+     */
     public LoginPage clickLogoutSidebarLink() {
         return logout();
     }
